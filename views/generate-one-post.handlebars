@@ -3,7 +3,7 @@
     <div class="card-header flex-row justify-space-between">
       <h2>{{post.title}}</h2>
       <div>
-        Posted by {{post.User.username}} on {{format_date post.createdAt}}
+        Posted by {{post.User.name}} on {{format_date post.createdAt}}
       </div>
     </div>
     <div class="card-body">
@@ -24,7 +24,7 @@
               {{body}}
             </p>
             <p>
-              &mdash; {{User.username}}, {{format_date createdAt}}
+              - {{User.name}}, {{format_date createdAt}}
             </p>
           </div>
         {{/each}}
@@ -32,17 +32,17 @@
     </section>
   {{/if}}
 
-  <form id="new-comment-form" class="card">
+  <form id="new-comment" class="card">
     <div class="card-header">
       <h3>Add New Comment</h3>
     </div>
 
     <div class="card-body">
-      <input type="hidden" name="post-id" value="{{post.id}}" />
+      <input type="hidden" name="post-id" id="post-id" value="{{post.id}}" />
 
       <label class="form-label" for="comment-body">Comment</label>
 
-      <textarea name="comment-body" class="form-input"></textarea>
+      <textarea name="comment-body" id="comment-content" class="form-input"></textarea>
 
       <button type="submit" class="btn">Submit</button>
     </div>
