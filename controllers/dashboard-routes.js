@@ -1,21 +1,31 @@
 const router = require('express').Router();
-const { Post } = require('../models/');
+const { Post, User } = require('../models/');
 const withAuth = require('../utils/auth');
 
 router.get('/', withAuth, async (req, res) => {
     try {
         const postData = await Post.findAll({
             where: {
-                user_id: req.session.user_id,
+                userId: req.session.user_id,
             },
+            include: [
+                {
+                    model: User,
+                    attributes: [
+                        'name'
+                    ]
+                },
+
+            ]
         });
 
         const posts = postData.map((post) => post.get({ plain: true }));
         res.render('dashboard', {
-            post,
+            posts,
             loggedIn: req.session.loggedIn
         });
     } catch (err) {
+        console.log(err);
         res.status(500).json(err);
     }
 });
@@ -23,7 +33,7 @@ router.get('/', withAuth, async (req, res) => {
 router.get('/new', withAuth, (req, res) => {
     try {
         res.render('create-new-post', {
-            user_id: req.session.user_id,
+            userId: req.session.user_id,
             loggedIn: req.session.loggedIn,
         });
     } catch (err) {

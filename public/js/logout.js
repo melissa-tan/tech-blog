@@ -5,7 +5,6 @@ const logout = async () => {
     });
     console.log(response);
     if (response.ok) {
-        alert('Redirect')
         document.location.replace('/');
     } else {
         alert(response.statusText);

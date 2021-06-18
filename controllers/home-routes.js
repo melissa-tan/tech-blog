@@ -2,13 +2,25 @@ const router = require('express').Router();
 const { Post, Comment, User } = require('../models/');
 
 // get all posts for homepage
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
     try {
-        console.log({id: req.session.user_id,
-            loggedIn: req.session.loggedIn});
+        const postData = await Post.findAll(
+            {
+                include: [
+                    {
+                        model: User,
+                        attributes: [
+                            'name'
+                        ]
+                    },
+
+                ]
+            });
+        console.log(postData);
+        const posts = postData.map((post) => post.get({ plain: true }));
         res.render('homepage', {
-            id: req.session.user_id,
-            loggedIn: req.session.loggedIn,
+            posts,
+            loggedIn: req.session.loggedIn
         });
     } catch (err) {
         res.status(500).json(err);
@@ -31,7 +43,7 @@ router.get('/post/:id', async (req, res) => {
         if (postData) {
             const post = postData.get({ plain: true });
 
-            res.render('generate-one-post', { post, loggedIn: req.session.loggedIn});
+            res.render('generate-one-post', { post, loggedIn: req.session.loggedIn });
         } else {
             res.status(404).end();
         }
@@ -57,13 +69,5 @@ router.get('/signup', (req, res) => {
 
     res.render('signup');
 });
-
-router.get('*', async (req, res) => {
-    try {
-      res.render('404');
-    } catch (err) {
-      res.status(500).json(err);
-    }
-  });
 
 module.exports = router;
