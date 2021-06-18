@@ -29,8 +29,8 @@ const deleteClickHandler = async function() {
 };
 
 document
-  .getElementById('#edit-post-form')
+  .getElementById('edit-post-form')
   .addEventListener('submit', editFormHandler);
 document
-  .getElementById('#delete-btn')
+  .getElementById('delete-btn')
   .addEventListener('click', deleteClickHandler);
