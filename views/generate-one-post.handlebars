@@ -1,8 +1,8 @@
 <div class="post">
   <article class="card">
-    <div class="card-header flex-row justify-space-between">
-      <h2>{{post.title}}</h2>
-      <div>
+    <div class="card-header">
+      <h4>{{post.title}}</h4>
+      <div class="post-info">
         Posted by {{post.User.name}} on {{format_date post.createdAt}}
       </div>
     </div>
@@ -12,9 +12,9 @@
   </article>
 
   {{#if post.Comments}}
-    <section class="card">
+    <div class="card special-margin" >
       <div class="card-header">
-        <h3>Comments</h3>
+        <h5>Comments</h5>
       </div>
 
       <div class="card-body">
@@ -23,18 +23,18 @@
             <p>
               {{body}}
             </p>
-            <p>
+            <p class="sub-font">
               - {{User.name}}, {{format_date createdAt}}
             </p>
           </div>
         {{/each}}
       </div>
-    </section>
+    </div>
   {{/if}}
 
   <form id="new-comment" class="card">
     <div class="card-header">
-      <h3>Add New Comment</h3>
+      <h5>Add New Comment</h5>
     </div>
 
     <div class="card-body">
@@ -44,7 +44,7 @@
 
       <textarea name="comment-body" id="comment-content" class="form-input"></textarea>
 
-      <button type="submit" class="btn">Submit</button>
+      <button type="submit" class="create-btn">Submit</button>
     </div>
   </form>
 </div>

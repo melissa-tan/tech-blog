@@ -1,11 +1,11 @@
 <div class="posts">
   {{#each posts}}
   <article class="card">
-    <div class="card-header flex-row justify-space-between">
-      <h2>
+    <div class="card-header">
+      <h5>
         <a href="/post/{{id}}">{{title}}</a>
-      </h2>
-      <div>
+      </h5>
+      <div class="post-info">
         Posted by {{User.name}} on {{format_date createdAt}}
       </div>
     </div>

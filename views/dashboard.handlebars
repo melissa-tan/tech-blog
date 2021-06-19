@@ -1,12 +1,17 @@
+<div class="dashboard-info">
+    <h5>Welcome to your dashboard!</h5>
+    These are your posts. Click on the title to edit or delete post.
+</div>
+
 <div class="posts">
   {{#each posts}}
   <article class="card">
-    <div class="card-header flex-row justify-space-between">
-      <h2>
+    <div class="card-header">
+      <h5>
         <a href="/dashboard/edit/{{id}}">{{title}}</a>
-      </h2>
-      <div>
-        Posted by {{User.name}} on {{format_date createdAt}}
+      </h5>
+      <div class="post-info">
+        You posted on {{format_date createdAt}}
       </div>
     </div>
   </article>
